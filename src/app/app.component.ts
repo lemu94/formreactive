@@ -4,8 +4,6 @@ import {
   FormControl,
   FormGroup,
   ReactiveFormsModule,
-  ValidationErrors,
-  ValidatorFn,
   Validators,
 } from '@angular/forms';
 import { RouterOutlet } from '@angular/router';
@@ -34,9 +32,7 @@ export class AppComponent implements OnInit, OnDestroy {
     ]),
     message: new FormControl('', [Validators.required]),
   });
-  get nom() {
-    return this.form.get('nom');
-  }
+
   public erreursForm: { [field: string]: string } = {
     nom: '',
     email: '',
@@ -63,18 +59,6 @@ export class AppComponent implements OnInit, OnDestroy {
     },
   };
   constructor() {}
-
-  nomMatch(): ValidatorFn {
-    return (control: AbstractControl): ValidationErrors | null => {
-      return control.get('nom')!.value == 'lemuel' ? { nomMatch: true } : null;
-    };
-  }
-  emailsMatch(): ValidatorFn {
-    return (control: AbstractControl): ValidationErrors | null => {
-      let dd = control.get('nom')!.value == 'lemuel' ? { noMatch: true } : null;
-      return dd;
-    };
-  }
 
   StatusForm() {
     if (!this.form) {
